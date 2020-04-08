@@ -1,1 +1,68 @@
-<p>currency-form works!</p>
+<div class="form-container">
+  <form id="alo" [formGroup]="currencyForm">
+    <h1>AJOUT D'UNE DEVISE</h1>
+    <div>
+      <div>
+        <label for="Code">Code</label>
+        <input type="text" name="Code" id="Code" formControlName="Code" />
+        <div
+          class="errorr"
+          *ngIf="Code.invalid && (Code.dirty || Code.touched)"
+        >
+          Code Requiered.
+        </div>
+      </div>
+      <div>
+        <label for="Nom">Nom</label>
+        <input type="text" name="Nom" id="Nom" formControlName="Nom" />
+        <div class="errorr" *ngIf="Nom.touched && Nom.invalid">
+          Name Requiered.
+        </div>
+      </div>
+
+      <div>
+        <label for="CodeAlpha">Code Alpha</label>
+        <input
+          type="text"
+          name="CodeAlpha"
+          id="CodeAlpha"
+          formControlName="CodeAlpha"
+        />
+        <div class="errorr" *ngIf="CodeAlpha.invalid && CodeAlpha.touched">
+          Code Alpha Requiered.
+        </div>
+      </div>
+      <div>
+        <label for="CodeIso">Code ISO</label>
+        <input
+          type="number"
+          name="CodeIso"
+          id="CodeIso"
+          formControlName="CodeIso"
+        />
+        <div class="errorr" *ngIf="CodeIso.touched && CodeIso.invalid">
+          Code ISO Requiered.
+        </div>
+      </div>
+
+      <div>
+        <label>
+          Langue
+        </label>
+        <select>
+          <option value="">Francais</option>
+          <option value="">Anglais</option>
+          <option value="">Arabe</option>
+        </select>
+      </div>
+
+      <div>
+        <label for=""></label>
+        <input type="submit" value="Valider" />
+
+        <label for=""></label>
+        <input (click)="reset()" type="submit" value="Réinitialiser" />
+      </div>
+    </div>
+  </form>
+</div>

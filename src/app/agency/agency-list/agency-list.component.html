@@ -3,8 +3,8 @@
     <mat-grid-list cols="2" rowHeight="16:1">
       <mat-grid-tile class="fullheight">
         <div fxFlex fxLayoutAlign="start center">
-          <button mat-button class="blueButton" routerLink="/currencyForm">
-            CREER
+          <button mat-button class="blueButton" routerLink="/agencyForm">
+            AJOUTER
           </button>
         </div>
       </mat-grid-tile>
@@ -23,9 +23,9 @@
 
 <div class="container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="code">
+    <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="nom">
@@ -33,29 +33,30 @@
       <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="isoCode">
-      <th mat-header-cell *matHeaderCellDef>Code ISO</th>
-      <td mat-cell *matCellDef="let element">{{ element.isoCode }}</td>
+    <ng-container matColumnDef="fax">
+      <th mat-header-cell *matHeaderCellDef>Fax</th>
+      <td mat-cell *matCellDef="let element">{{ element.fax }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="alphaCode">
-      <th mat-header-cell *matHeaderCellDef>Code Alpha</th>
-      <td mat-cell *matCellDef="let element">{{ element.alphaCode }}</td>
+    <ng-container matColumnDef="adresse">
+      <th mat-header-cell *matHeaderCellDef>Adresse</th>
+      <td mat-cell *matCellDef="let element">{{ element.adresse }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="creationDate">
-      <th mat-header-cell *matHeaderCellDef>Date de création</th>
-      <td mat-cell *matCellDef="let element">{{ element.creationDate }}</td>
+    <ng-container matColumnDef="telephone">
+      <th mat-header-cell *matHeaderCellDef>Telephone</th>
+      <td mat-cell *matCellDef="let element">{{ element.telephone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          mat-mini-fab
-          color="warn"
-          (click)="deleteCurrency(element.code)"
-        >
+        <button mat-mini-fab color="warn" (click)="deleteAgency(element.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -64,6 +65,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
 </div>

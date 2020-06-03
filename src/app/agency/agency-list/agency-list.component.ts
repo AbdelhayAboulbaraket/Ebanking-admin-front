@@ -3,6 +3,9 @@ import { Agency } from '../model/agency';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { AgencyService } from '../service/agency.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-agency-list',
@@ -27,8 +30,12 @@ export class AgencyListComponent implements OnInit {
     'actions',
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private agencyService: AgencyService) {}
-  deleteAgency(id: number) {
+  constructor(
+    private agencyService: AgencyService,
+    private route: Router,
+    public dialog: MatDialog
+  ) {}
+  deleteAgency(id: string) {
     this.agencyService.delete(id).subscribe(
       (data) => {
         console.log(data);
@@ -60,5 +67,24 @@ export class AgencyListComponent implements OnInit {
     );
 
     this.dataSource.paginator = this.paginator;
+  }
+
+  openDialog(code: string): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: {
+        message: "Voulez vous supprimer l'agence " + code + '?',
+        codeSupp: code,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteAgency(result.data.codeSupp);
+      }
+    });
+  }
+  goToAgencyItem(code: string) {
+    this.route.navigate(['/agencyItem/' + code]);
   }
 }

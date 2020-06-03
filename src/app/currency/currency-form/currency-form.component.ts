@@ -49,6 +49,7 @@ export class CurrencyFormComponent implements OnInit {
     return this.currencyForm.get('langue');
   }
   onSubmit() {
+    this.code.setValue(this.code.value.trim());
     this.currency = this.currencyForm.value;
     this.currencyService
       .save(this.currency)

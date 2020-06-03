@@ -37,9 +37,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
-  declarations: [NavigationComponent],
+  declarations: [NavigationComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,

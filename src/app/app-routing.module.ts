@@ -9,6 +9,9 @@ import { AgencyListComponent } from './agency/agency-list/agency-list.component'
 import { AgencyFormComponent } from './agency/agency-form/agency-form.component';
 import { AdminFormComponent } from './admin/admin-form/admin-form.component';
 import { AdminListComponent } from './admin/admin-list/admin-list.component';
+import { CurrencyItemComponent } from './currency/currency-item/currency-item.component';
+import { AgencyItemComponent } from './agency/agency-item/agency-item.component';
+import { AgentItemComponent } from './agent/agent-item/agent-item.component';
 
 const routes: Routes = [
   {
@@ -24,11 +27,20 @@ const routes: Routes = [
         component: CurrencyFormComponent,
       },
       {
-        path: 'agentList',
+        path: 'currencyItem/:id',
+        component: CurrencyItemComponent,
+      },
+
+      {
+        path: 'agency/:id/agentList',
         component: AgentListComponent,
       },
       {
-        path: 'agentForm',
+        path: 'agency/:id/agents/:id2',
+        component: AgentItemComponent,
+      },
+      {
+        path: 'agency/:id/agentForm',
         component: AgentFormComponent,
       },
       {
@@ -38,6 +50,10 @@ const routes: Routes = [
       {
         path: 'agencyForm',
         component: AgencyFormComponent,
+      },
+      {
+        path: 'agencyItem/:id',
+        component: AgencyItemComponent,
       },
       {
         path: 'adminList',

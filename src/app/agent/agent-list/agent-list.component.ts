@@ -3,6 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Agent } from '../model/agent';
 import { AgentService } from '../service/agent.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-agent-list',
@@ -11,7 +14,7 @@ import { AgentService } from '../service/agent.service';
 })
 export class AgentListComponent implements OnInit {
   AGENTS: Agent[];
-
+  id: string;
   dataSource = new MatTableDataSource<Agent>(this.AGENTS);
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -30,17 +33,23 @@ export class AgentListComponent implements OnInit {
     'actions',
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private agentService: AgentService) {}
+  constructor(
+    private router: ActivatedRoute,
+    public dialog: MatDialog,
+    private route: Router,
+    private agentService: AgentService
+  ) {}
 
   deleteAgent(id: number) {
     this.agentService.delete(id).subscribe(
       (data) => {
         console.log(data);
 
-        this.agentService.findAll().subscribe(
+        this.agentService.findAllAgents(this.id).subscribe(
           (data) => {
             this.AGENTS = data;
             this.dataSource = new MatTableDataSource<Agent>(this.AGENTS);
+            this.dataSource.paginator = this.paginator;
           },
           (error) => {
             this.dataSource = new MatTableDataSource<Agent>(null);
@@ -52,16 +61,37 @@ export class AgentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.agentService.findAll().subscribe(
+    this.id = this.router.snapshot.params['id'];
+    this.agentService.findAllAgents(this.id).subscribe(
       (data) => {
         this.AGENTS = data;
         this.dataSource = new MatTableDataSource<Agent>(this.AGENTS);
+        this.dataSource.paginator = this.paginator;
       },
       (error) => {
         this.dataSource = new MatTableDataSource<Agent>(null);
       }
     );
+  }
+  goToForm() {
+    this.route.navigate(['agency/' + this.id + '/agentForm']);
+  }
+  goToAgents(id2: string) {
+    this.route.navigate(['agency/' + this.id + '/agents/' + id2]);
+  }
+  openDialog(code: string): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: {
+        message: "Voulez vous supprimer l'agent " + code + '?',
+        codeSupp: code,
+      },
+    });
 
-    this.dataSource.paginator = this.paginator;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteAgent(result.data.codeSupp);
+      }
+    });
   }
 }

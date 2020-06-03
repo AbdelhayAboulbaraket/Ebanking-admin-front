@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AgentService } from '../service/agent.service';
+import { AgencyService } from 'src/app/agency/service/agency.service';
 import { Agent } from '../model/agent';
 import { Agency } from 'src/app/agency/model/agency';
-import { AgencyService } from 'src/app/agency/service/agency.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-agent-form',
-  templateUrl: './agent-form.component.html',
-  styleUrls: ['./agent-form.component.css'],
+  selector: 'app-agent-item',
+  templateUrl: './agent-item.component.html',
+  styleUrls: ['./agent-item.component.css'],
 })
-export class AgentFormComponent implements OnInit {
+export class AgentItemComponent implements OnInit {
   agent: Agent;
   agencies: Agency[];
   id: string;
+  id2: string;
   agentForm = new FormGroup({
     nom: new FormControl('', Validators.required),
     prenom: new FormControl('', Validators.required),
@@ -24,7 +25,7 @@ export class AgentFormComponent implements OnInit {
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
     agence: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.nullValidator),
   });
 
   get prenom() {
@@ -57,6 +58,9 @@ export class AgentFormComponent implements OnInit {
   get agence() {
     return this.agentForm.get('agence');
   }
+  get password() {
+    return this.agentForm.get('password');
+  }
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -66,15 +70,30 @@ export class AgentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.id2 = this.route.snapshot.params['id2'];
     this.agencyService.findAgency(this.id).subscribe((data) => {
       this.agencies = data;
     });
+    this.agentService.findAgent(this.id2).subscribe(
+      (data) => {
+        this.agent = data[0];
+        this.adresse.setValue(this.agent.adresse);
+        this.nom.setValue(this.agent.nom);
+        this.telephone.setValue(this.agent.telephone);
+        this.prenom.setValue(this.agent.prenom);
+        this.email.setValue(this.agent.email);
+        this.username.setValue(this.agent.username);
+        this.cin.setValue(this.agent.cin);
+        this.agence.setValue(this.agent.agence);
+      },
+      (error) => console.log(error)
+    );
   }
 
   onSubmit() {
     this.agent = this.agentForm.value;
     this.agentService
-      .save(this.agent)
+      .update(this.id2, this.agent)
       .subscribe((result) => this.gotoAgentList());
   }
 
@@ -87,7 +106,6 @@ export class AgentFormComponent implements OnInit {
   }
 
   goBack() {
-    console.log('salam');
     this.router.navigate(['agency/' + this.id + '/agentList']);
   }
 }

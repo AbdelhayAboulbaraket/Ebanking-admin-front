@@ -3,6 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Currency } from '../model/currency';
 import { CurrencyService } from '../service/currency.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-currency-list',
@@ -25,7 +28,11 @@ export class CurrencyListComponent implements OnInit {
     'actions',
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private currencyService: CurrencyService) {}
+  constructor(
+    private currencyService: CurrencyService,
+    private route: Router,
+    public dialog: MatDialog
+  ) {}
 
   deleteCurrency(id: string) {
     this.currencyService.delete(id).subscribe(
@@ -52,12 +59,29 @@ export class CurrencyListComponent implements OnInit {
         console.log(data);
         console.log(this.CURRENCIES);
         this.dataSource = new MatTableDataSource<Currency>(this.CURRENCIES);
+        this.dataSource.paginator = this.paginator;
       },
       (error) => {
         this.dataSource = new MatTableDataSource<Currency>(null);
       }
     );
+  }
+  goToCurrencyItem(code: string) {
+    this.route.navigate(['/currencyItem/' + code]);
+  }
+  openDialog(code: string): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: {
+        message: 'Voulez vous supprimer la devise ' + code + '?',
+        codeSupp: code,
+      },
+    });
 
-    this.dataSource.paginator = this.paginator;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteCurrency(result.data.codeSupp);
+      }
+    });
   }
 }

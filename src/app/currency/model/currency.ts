@@ -4,4 +4,5 @@ export class Currency {
   isoCode: string;
   alphaCode: number;
   creationDate: Date;
+  langue: string;
 }

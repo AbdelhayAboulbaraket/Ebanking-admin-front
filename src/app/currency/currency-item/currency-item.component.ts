@@ -70,7 +70,7 @@ export class CurrencyItemComponent implements OnInit {
   }
 
   gotoCurrencyList() {
-    this.router.navigate(['/currencyList']);
+    this.router.navigate(['/overview/currencyList']);
   }
 
   reset() {

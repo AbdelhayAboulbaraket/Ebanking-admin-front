@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Admin } from '../model/admin';
 import { AdminService } from '../service/admin.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-admin-list',
@@ -29,9 +31,9 @@ export class AdminListComponent implements OnInit {
     'actions',
   ];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, public dialog: MatDialog) {}
 
-  deleteAgent(id: number) {
+  deleteAdmin(id: number) {
     this.adminService.delete(id).subscribe(
       (data) => {
         console.log(data);
@@ -62,5 +64,20 @@ export class AdminListComponent implements OnInit {
     );
 
     this.dataSource.paginator = this.paginator;
+  }
+  openDialog(code: string): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: {
+        message: "Voulez vous supprimer l'admin " + code + '?',
+        codeSupp: code,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteAdmin(result.data.codeSupp);
+      }
+    });
   }
 }

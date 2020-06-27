@@ -98,7 +98,7 @@ export class AgentItemComponent implements OnInit {
   }
 
   gotoAgentList() {
-    this.router.navigate(['agency/' + this.id + '/agentList']);
+    this.router.navigate(['/overview/agency/' + this.id + '/agentList']);
   }
 
   reset() {

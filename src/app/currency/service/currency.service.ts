@@ -10,7 +10,7 @@ import { retry } from 'rxjs/operators';
 export class CurrencyService {
   private currencyUrl: string;
   constructor(private http: HttpClient) {
-    this.currencyUrl = 'http://localhost:8080/devise';
+    this.currencyUrl = 'http://localhost:8081/devise';
   }
   public findAll(): Observable<Currency[]> {
     let username = 'admin';

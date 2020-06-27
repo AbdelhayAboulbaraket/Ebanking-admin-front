@@ -85,6 +85,6 @@ export class AgencyListComponent implements OnInit {
     });
   }
   goToAgencyItem(code: string) {
-    this.route.navigate(['/agencyItem/' + code]);
+    this.route.navigate(['/overview//agencyItem/' + code]);
   }
 }

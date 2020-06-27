@@ -79,7 +79,7 @@ export class AgentFormComponent implements OnInit {
   }
 
   gotoAgentList() {
-    this.router.navigate(['agency/' + this.id + '/agentList']);
+    this.router.navigate(['/overview/agency/' + this.id + '/agentList']);
   }
 
   reset() {
@@ -88,6 +88,6 @@ export class AgentFormComponent implements OnInit {
 
   goBack() {
     console.log('salam');
-    this.router.navigate(['agency/' + this.id + '/agentList']);
+    this.router.navigate(['/overview/agency/' + this.id + '/agentList']);
   }
 }

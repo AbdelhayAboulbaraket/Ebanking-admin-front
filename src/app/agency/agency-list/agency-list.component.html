@@ -3,7 +3,11 @@
     <mat-grid-list cols="2" rowHeight="16:1">
       <mat-grid-tile class="fullheight">
         <div fxFlex fxLayoutAlign="start center">
-          <button mat-button class="blueButton" routerLink="/agencyForm">
+          <button
+            mat-button
+            class="blueButton"
+            routerLink="/overview//agencyForm"
+          >
             Ajouter
           </button>
         </div>
@@ -69,7 +73,7 @@
         <button
           mat-icon-button
           color="primary"
-          [routerLink]="['/agency', element.id, 'agentList']"
+          [routerLink]="['/overview//agency', element.id, 'agentList']"
         >
           <mat-icon>people_outline</mat-icon>
         </button>

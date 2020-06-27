@@ -12,10 +12,20 @@ import { AdminListComponent } from './admin/admin-list/admin-list.component';
 import { CurrencyItemComponent } from './currency/currency-item/currency-item.component';
 import { AgencyItemComponent } from './agency/agency-item/agency-item.component';
 import { AgentItemComponent } from './agent/agent-item/agent-item.component';
+import { LoginComponent } from './authentification/components/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'overview',
     component: NavigationComponent,
     children: [
       {

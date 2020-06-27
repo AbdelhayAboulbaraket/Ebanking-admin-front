@@ -74,10 +74,10 @@ export class AgentListComponent implements OnInit {
     );
   }
   goToForm() {
-    this.route.navigate(['agency/' + this.id + '/agentForm']);
+    this.route.navigate(['/overview/agency/' + this.id + '/agentForm']);
   }
   goToAgents(id2: string) {
-    this.route.navigate(['agency/' + this.id + '/agents/' + id2]);
+    this.route.navigate(['/overview/agency/' + this.id + '/agents/' + id2]);
   }
   openDialog(code: string): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {

@@ -67,7 +67,7 @@ export class CurrencyListComponent implements OnInit {
     );
   }
   goToCurrencyItem(code: string) {
-    this.route.navigate(['/currencyItem/' + code]);
+    this.route.navigate(['/overview/currencyItem/' + code]);
   }
   openDialog(code: string): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {

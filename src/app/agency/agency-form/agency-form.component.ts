@@ -53,7 +53,7 @@ export class AgencyFormComponent implements OnInit {
   }
 
   gotoAgentList() {
-    this.router.navigate(['/agencyList']);
+    this.router.navigate(['/overview//agencyList']);
   }
 
   reset() {

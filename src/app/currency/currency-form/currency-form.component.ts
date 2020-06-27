@@ -57,7 +57,7 @@ export class CurrencyFormComponent implements OnInit {
   }
 
   gotoCurrencyList() {
-    this.router.navigate(['/currencyList']);
+    this.router.navigate(['/overview/currencyList']);
   }
 
   reset() {

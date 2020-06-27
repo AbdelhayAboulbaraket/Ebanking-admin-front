@@ -68,7 +68,7 @@ export class AgencyItemComponent implements OnInit {
   }
 
   gotoAgencyList() {
-    this.router.navigate(['/agencyList']);
+    this.router.navigate(['/overview//agencyList']);
   }
 
   reset() {

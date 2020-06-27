@@ -67,7 +67,7 @@ export class AdminFormComponent implements OnInit {
   }
 
   gotoAdminList() {
-    this.router.navigate(['/adminList']);
+    this.router.navigate(['/overview//adminList']);
   }
 
   reset() {

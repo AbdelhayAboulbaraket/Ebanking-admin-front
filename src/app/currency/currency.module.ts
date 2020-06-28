@@ -8,6 +8,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CurrencyListComponent } from './currency-list/currency-list.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { CurrencyListComponent } from './currency-list/currency-list.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    SharedModule,
   ],
 })
 export class CurrencyModule {}

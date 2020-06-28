@@ -19,7 +19,7 @@ export class AgencyService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
 
-    return this.http.get<Agency[]>(this.agencyUrl + 's', { headers });
+    return this.http.get<Agency[]>(this.agencyUrl + 's');
   }
 
   public save(agent: Agency) {
@@ -28,7 +28,7 @@ export class AgencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.post<Agency>(this.agencyUrl + 's', agent, { headers });
+    return this.http.post<Agency>(this.agencyUrl + 's', agent);
   }
   delete(id: string): Observable<any> {
     let username = 'admin';
@@ -36,7 +36,7 @@ export class AgencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.delete(`${this.agencyUrl}/${id}`, { headers });
+    return this.http.delete(`${this.agencyUrl}/${id}`);
   }
   public update(id: string, agency: Agency): Observable<any> {
     let username = 'admin';
@@ -44,7 +44,7 @@ export class AgencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.put(`${this.agencyUrl}/${id}`, agency, { headers });
+    return this.http.put(`${this.agencyUrl}/${id}`, agency);
   }
 
   public findAgency(id: string): Observable<Agency[]> {
@@ -53,8 +53,6 @@ export class AgencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.get<Agency[]>(this.agencyUrl + 's?id=' + id, {
-      headers,
-    });
+    return this.http.get<Agency[]>(this.agencyUrl + 's?id=' + id);
   }
 }

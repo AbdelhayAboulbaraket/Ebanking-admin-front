@@ -19,7 +19,7 @@ export class AdminService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
 
-    return this.http.get<Admin[]>(this.adminUrl + 's', { headers });
+    return this.http.get<Admin[]>(this.adminUrl + 's');
   }
 
   public save(agent: Admin) {
@@ -29,7 +29,7 @@ export class AdminService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
 
-    return this.http.post<Admin>(this.adminUrl + 's', agent, { headers });
+    return this.http.post<Admin>(this.adminUrl + 's', agent);
   }
   delete(id: number): Observable<any> {
     let username = 'admin';
@@ -38,6 +38,6 @@ export class AdminService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
 
-    return this.http.delete(`${this.adminUrl}/${id}`, { headers });
+    return this.http.delete(`${this.adminUrl}/${id}`);
   }
 }

@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           this.loginInvalid = false;
-          this.router.navigate(['/overview']);
+          this.router.navigate(['/overview/currencyList']);
         },
         (error) => {
           this.loginInvalid = true;

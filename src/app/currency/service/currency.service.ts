@@ -19,7 +19,7 @@ export class CurrencyService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
 
-    return this.http.get<Currency[]>(this.currencyUrl + 's', { headers });
+    return this.http.get<Currency[]>(this.currencyUrl + 's');
   }
   public findCurrency(code: string): Observable<Currency[]> {
     let username = 'admin';
@@ -27,9 +27,7 @@ export class CurrencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.get<Currency[]>(this.currencyUrl + 's?code=' + code, {
-      headers,
-    });
+    return this.http.get<Currency[]>(this.currencyUrl + 's?code=' + code);
   }
 
   public save(currency: Currency) {
@@ -38,9 +36,7 @@ export class CurrencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.post<Currency>(this.currencyUrl + 's', currency, {
-      headers,
-    });
+    return this.http.post<Currency>(this.currencyUrl + 's', currency);
   }
   public delete(id: string): Observable<any> {
     let username = 'admin';
@@ -48,9 +44,7 @@ export class CurrencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.delete(`${this.currencyUrl}/${id}`, {
-      headers,
-    });
+    return this.http.delete(`${this.currencyUrl}/${id}`);
   }
 
   public update(id: string, currency: Currency): Observable<any> {
@@ -59,6 +53,6 @@ export class CurrencyService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.put(`${this.currencyUrl}/${id}`, currency, { headers });
+    return this.http.put(`${this.currencyUrl}/${id}`, currency);
   }
 }

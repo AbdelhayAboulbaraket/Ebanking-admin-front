@@ -21,8 +21,7 @@ export class AgentService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
     return this.http.get<Agent[]>(
-      'http://localhost:8081/agence/' + id + '/agents',
-      { headers }
+      'http://localhost:8081/agence/' + id + '/agents'
     );
   }
 
@@ -32,7 +31,7 @@ export class AgentService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.post<Agent>(this.agentUrl + 's', agent, { headers });
+    return this.http.post<Agent>(this.agentUrl + 's', agent);
   }
   delete(id: number): Observable<any> {
     let username = 'admin';
@@ -40,7 +39,7 @@ export class AgentService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.delete(`${this.agentUrl}/${id}`, { headers });
+    return this.http.delete(`${this.agentUrl}/${id}`);
   }
   public update(id: string, agent: Agent): Observable<any> {
     let username = 'admin';
@@ -48,7 +47,7 @@ export class AgentService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.put(`${this.agentUrl}/${id}`, agent, { headers });
+    return this.http.put(`${this.agentUrl}/${id}`, agent);
   }
 
   public findAgent(id: string): Observable<Agent[]> {
@@ -57,8 +56,6 @@ export class AgentService {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
-    return this.http.get<Agent[]>(this.agentUrl + 's?id=' + id, {
-      headers,
-    });
+    return this.http.get<Agent[]>(this.agentUrl + 's?id=' + id);
   }
 }

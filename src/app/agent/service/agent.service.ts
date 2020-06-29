@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AgentService {
   private agentUrl: string;
   constructor(private http: HttpClient) {
-    this.agentUrl = 'http://localhost:8081/agent';
+    this.agentUrl = 'https://ebanking-banking.herokuapp.com/agent';
   }
   /* public findAll(): Observable<Agent[]> {
     return this.http.get<Agent[]>(this.agentUrl);
@@ -21,7 +21,7 @@ export class AgentService {
       Authorization: 'Basic ' + btoa(username + ':' + password),
     });
     return this.http.get<Agent[]>(
-      'http://localhost:8081/agence/' + id + '/agents'
+      'https://ebanking-banking.herokuapp.com/agence/' + id + '/agents'
     );
   }
 

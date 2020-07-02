@@ -10,7 +10,7 @@ export class AdminService {
   private adminUrl: string;
 
   constructor(private http: HttpClient) {
-    this.adminUrl = 'https://ebanking-banking.herokuapp.com/admin';
+    this.adminUrl = 'http://localhost:8081/admin';
   }
   public findAll(): Observable<Admin[]> {
     let username = 'admin';

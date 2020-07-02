@@ -10,7 +10,7 @@ import { Agent } from 'src/app/agent/model/agent';
 export class AgencyService {
   private agencyUrl: string;
   constructor(private http: HttpClient) {
-    this.agencyUrl = 'https://ebanking-banking.herokuapp.com/agence';
+    this.agencyUrl = 'http://localhost:8081/agence';
   }
   public findAll(): Observable<Agency[]> {
     let username = 'admin';
